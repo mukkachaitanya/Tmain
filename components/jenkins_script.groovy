@@ -6,11 +6,9 @@ node {
           parallel( 
               appliance:{
                 dir('certification-appliance') {
-                    git credentialsId: '714b269f-241b-4c02-8c29-16e172046721', url: 'https://github.com/hortonworks/certification-appliance', branch: '$APPLIANCE_BRANCH'
                 }
               }, certification_repo:{
                 dir('certification') {
-                    git credentialsId: '714b269f-241b-4c02-8c29-16e172046721', url: 'https://github.com/hortonworks/certification', branch: 'testHCK'
                 }
               }
           )
@@ -18,8 +16,6 @@ node {
        }
        stage('Build') {
           // Run the  build
-            sh 'rsync -r --exclude=.git certification-appliance/* App'
-            sh 'rsync -r --del --exclude=.git certification App/build/common'
             dir('builds'){
                 sh 'rm -rf ./*' //clean('builds')
                 sh 'tar -zvcf Appliance-$BUILD_TAG.tar.gz ../App --exclude-vcs'
