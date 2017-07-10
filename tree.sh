@@ -1,1 +1,1 @@
-echo Tree
+echo `tree -L 3`
